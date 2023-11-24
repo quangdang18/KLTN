@@ -124,7 +124,7 @@ resource "aws_instance" "admin" {
     -e "APP_BASE_URL=http://${var.alb-be-dns}:8080"  \
     -p 82:80 -v /var/log/nginx:/var/log/nginx  \
     --name shopizer_admin \
-    ht04/shopizer-admin:1.0.1
+    quangdang18/shopizer-admin:1.0.1
 
     # docker running
     while [ "$(sudo docker container inspect -f {{.State.Running}} shopizer_admin)" != "true" ]; do 
