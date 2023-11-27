@@ -47,13 +47,13 @@ sudo service docker restart
 
 # Setup backend
 mkdir -p /var/log/
-docker pull quangdang18/shopizer-service:1.1.3
+docker pull quangdang18/shopizer-server:1.1.3
 
 docker run -d \
 -p 8080:8080 \
 --restart always \
 -v /var/log:/opt/app/logs \
-quangdang18/shopizer-service:1.1.3
+quangdang18/shopizer-server:1.1.3
 
 # setup cloudwatch agent
 sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
