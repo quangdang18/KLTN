@@ -17,9 +17,9 @@ resource "aws_security_group" "fe-alb-sg" {
       self             = false
     },
     {
-      description      = "Allow all traffic port 443"
-      from_port        = 443
-      to_port          = 443
+      description      = "Allow all traffic port 82"
+      from_port        = 82
+      to_port          = 82
       protocol         = "tcp"
       cidr_blocks      = [var.internet-cidr]
       ipv6_cidr_blocks = []
