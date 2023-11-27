@@ -14,11 +14,11 @@ variable "ubuntu-ami" {
 
 variable "ssh-key-name" {
   type    = string
-  default = "keypair-l2"
+  default = "keypair-l3"
 }
 
 variable "default-name" {
-  type = string
+  type    = string
 }
 
 variable "public-subnet-ids" {

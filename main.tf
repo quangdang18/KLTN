@@ -10,7 +10,7 @@ module "vpc" {
   frontend-subnet-cidrs = ["172.20.3.0/24", "172.20.4.0/24"]
   backend-subnet-cidrs  = ["172.20.5.0/24", "172.20.6.0/24"]
   database-subnet-cidrs = ["172.20.7.0/24"]
-  ssh-key-name          = "keypair-l2"
+  ssh-key-name          = "keypair-l3"
   nat-ami               = "ami-04106ae1c90766385"
 }
 

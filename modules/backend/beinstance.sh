@@ -2,7 +2,7 @@
 
 # Change default username
 echo "Change default username"
-user=shopizer
+user=${var.default-name}
 usermod  -l $user ubuntu
 groupmod -n $user ubuntu
 usermod  -d /home/$user -m $user

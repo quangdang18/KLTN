@@ -14,7 +14,7 @@ variable "ubuntu-ami" {
 
 variable "ssh-key-name" {
   type    = string
-  default = "keypair-l2"
+  default = "keypair-l3"
 }
 
 variable "private-ip" {
@@ -24,6 +24,11 @@ variable "private-ip" {
 
 variable "database-subnet-ids" {
   type = list(string)
+}
+
+variable "default-name" {
+  type    = string
+  default = "shopizer"
 }
 
 variable "nat-sg-id" {

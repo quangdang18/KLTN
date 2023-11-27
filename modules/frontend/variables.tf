@@ -23,7 +23,7 @@ variable "internet-cidr" {
 
 variable "ssh-key-name" {
   type    = string
-  default = "keypair-l2"
+  default = "keypair-l3"
 }
 
 variable "ubuntu-ami" {
