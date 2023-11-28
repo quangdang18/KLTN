@@ -162,7 +162,7 @@ resource "aws_instance" "frontend" {
               },
               {
                 "file_path": "/var/log/nginx/error.log",
-                "log_group_name": "error.log",
+                "log_group_name": "fe-error.log",
                 "log_stream_name": "{instance_id}",
                 "retention_in_days": 30
               }

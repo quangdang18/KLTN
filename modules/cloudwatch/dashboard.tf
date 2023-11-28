@@ -48,8 +48,8 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
             [{ "expression" : "(m2+m3)/m1*100", "label" : "Expression1", "id" : "e1", "region" : "us-east-1" }],
             [{ "expression" : "m3/m1", "label" : "Expression2", "id" : "e2", "region" : "us-east-1", "visible" : false }],
             ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_200_fe.name, { "id" : "m1", "visible" : false, "region" : "us-east-1" }],
-            [".", aws_cloudwatch_log_metric_filter.http_4xx_fe.name, { "id" : "m2", "visible" : false, "region" : "us-east-1" }],
-            [".", aws_cloudwatch_log_metric_filter.http_5xx_fe.name, { "id" : "m3", "visible" : false, "region" : "us-east-1" }]
+            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_4xx_fe.name, { "id" : "m2", "visible" : false, "region" : "us-east-1" }],
+            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_5xx_fe.name, { "id" : "m3", "visible" : false, "region" : "us-east-1" }]
           ]
           sparkline = true
           view      = "timeSeries"
@@ -107,6 +107,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           stacked = false
           title   = "Mem_used_percent FE"
           period  = 300
+          timezone = "+0700"
           region  = "us-east-1"
         }
       },
@@ -175,7 +176,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_latency_adm.name, { "region" : "us-east-1" }]
+            ["Admin_Metric", aws_cloudwatch_log_metric_filter.http_latency_adm.name, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
@@ -200,9 +201,9 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           metrics = [
             [{ "expression" : "(m2+m3)/m1*100", "label" : "Expression1", "id" : "e1", "region" : "us-east-1" }],
             [{ "expression" : "m3/m1", "label" : "Expression2", "id" : "e2", "region" : "us-east-1", "visible" : false }],
-            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_200_fe.name, { "id" : "m1", "visible" : false, "region" : "us-east-1" }],
-            [".", aws_cloudwatch_log_metric_filter.http_4xx_adm.name, { "id" : "m2", "visible" : false, "region" : "us-east-1" }],
-            [".", aws_cloudwatch_log_metric_filter.http_5xx_adm.name, { "id" : "m3", "visible" : false, "region" : "us-east-1" }]
+            ["Admin_Metric", aws_cloudwatch_log_metric_filter.http_200_adm.name, { "id" : "m1", "visible" : false, "region" : "us-east-1" }],
+            ["Admin_Metric", aws_cloudwatch_log_metric_filter.http_4xx_adm.name, { "id" : "m2", "visible" : false, "region" : "us-east-1" }],
+            ["Admin_Metric", aws_cloudwatch_log_metric_filter.http_5xx_adm.name, { "id" : "m3", "visible" : false, "region" : "us-east-1" }]
           ]
           sparkline = true
           view      = "timeSeries"
@@ -232,7 +233,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_request_adm.name, { "region" : "us-east-1" }]
+            ["Admin_Metric", aws_cloudwatch_log_metric_filter.http_request_adm.name, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
@@ -260,6 +261,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           stacked = false
           title   = "Mem_used_percent adm"
           period  = 300
+          timezone = "+0700"
           region  = "us-east-1"
         }
       },
@@ -379,8 +381,9 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ["CWAgent", "mem_used_percent", "InstanceId", id, { "region" : "us-east-1" }]]
           view    = "timeSeries"
           stacked = false
-          title   = "Mem_used_percent adm"
+          title   = "Mem_used_percent BE"
           period  = 300
+          timezone = "+0700"
           region  = "us-east-1"
         }
       },
@@ -397,7 +400,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "Disk_used_percent adm"
+          title    = "Disk_used_percent BE"
           period   = 300
           width    = 1500
           height   = 200
@@ -420,7 +423,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "CPUUtilization adm"
+          title    = "CPUUtilization BE"
           period   = 300
           width    = 1500
           height   = 200

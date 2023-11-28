@@ -159,7 +159,7 @@ resource "aws_instance" "admin" {
               },
               {
                 "file_path": "/var/log/nginx/error.log",
-                "log_group_name": "admin-error.log",
+                "log_group_name": "adm-error.log",
                 "log_stream_name": "{instance_id}",
                 "retention_in_days": -1
               }

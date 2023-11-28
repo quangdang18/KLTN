@@ -5,7 +5,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_200_adm" {
 
   metric_transformation {
     name      = "http_200_adm"
-    namespace = "Frontend_Metric"
+    namespace = "Admin_Metric"
     value     = "1"
   }
 }
@@ -17,7 +17,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_5xx_adm" {
 
   metric_transformation {
     name      = "Http_5xx_adm"
-    namespace = "Frontend_Metric"
+    namespace = "Admin_Metric"
     value     = "1"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_4xx_adm" {
 
   metric_transformation {
     name      = "http_4xx_adm"
-    namespace = "Frontend_Metric"
+    namespace = "Admin_Metric"
     value     = "1"
   }
 }
@@ -41,7 +41,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_latency_adm" {
 
   metric_transformation {
     name      = "http_latency_adm"
-    namespace = "Frontend_Metric"
+    namespace = "Admin_Metric"
     value     = "$request_time"
   }
 }
@@ -53,7 +53,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_request_adm" {
 
   metric_transformation {
     name      = "http_request_adm"
-    namespace = "Frontend_Metric"
+    namespace = "Admin_Metric"
     value     = "1"
   }
 }
