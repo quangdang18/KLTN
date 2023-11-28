@@ -10,7 +10,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_request_be" {
   }
 }
 
-resource "aws_cloudwatch_log_metric_filter" "http_request_error" {
+resource "aws_cloudwatch_log_metric_filter" "http_request_error_be" {
   name           = "http_request_error_be"
   pattern        = "\"ERROR\" \"http-nio\""
   log_group_name = "backend.log"
@@ -22,7 +22,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_request_error" {
   }
 }
 
-resource "aws_cloudwatch_log_metric_filter" "number_exception" {
+resource "aws_cloudwatch_log_metric_filter" "number_exception_be" {
   name           = "number_exception_be"
   pattern        = "exception"
   log_group_name = "backend.log"

@@ -22,11 +22,11 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            ["HTTP_Request", aws_cloudwatch_log_metric_filter.http_latency_fe.name, { "region" : "us-east-1" }]
+            ["Frontend_Metric", aws_cloudwatch_log_metric_filter.http_latency_fe.name, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "http_latency_FE"
+          title    = "http_latency_fe"
           period   = 60
           stat     = "Average"
           width    = 1500
@@ -59,10 +59,10 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           yAxis = {
             left = {
               min = 0
-              max = 100
+              max = 100 
             }
           }
-          title    = "HTTP_Error_percent_FE"
+          title    = "http_error_percent_fe"
           width    = 1500
           height   = 200
           start    = "-PT3H"
@@ -85,7 +85,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           stacked  = false
           period   = 60
           stat     = "Sum"
-          title    = "number_http_request_FE"
+          title    = "http_request_fe"
           width    = 1500
           height   = 200
           start    = "-PT3H"
@@ -105,7 +105,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ["CWAgent", "mem_used_percent", "InstanceId", id, { "region" : "us-east-1" }]]
           view    = "timeSeries"
           stacked = false
-          title   = "Mem_used_percent FE"
+          title   = "Mem_used_percent_fe"
           period  = 300
           timezone = "+0700"
           region  = "us-east-1"
@@ -119,12 +119,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.frontend_instance_ids :
-            ["CWAgent", "disk_used_percent", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.frontend_instance_ids :
+            ["CWAgent", "disk_used_percent", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "Disk_used_percent FE"
+          title    = "Disk_used_percent_fe"
           period   = 300
           width    = 1500
           height   = 200
@@ -142,12 +142,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.frontend_instance_ids :
-            ["AWS/EC2", "CPUUtilization", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.frontend_instance_ids :
+            ["AWS/EC2", "CPUUtilization", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "CPUUtilization FE"
+          title    = "CPUUtilization_fe"
           period   = 300
           width    = 1500
           height   = 200
@@ -216,7 +216,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
               max = 100
             }
           }
-          title    = "HTTP_Error_percent_adm"
+          title    = "http_error_percent_adm"
           width    = 1500
           height   = 200
           start    = "-PT3H"
@@ -239,7 +239,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           stacked  = false
           period   = 60
           stat     = "Sum"
-          title    = "number_http_request_adm"
+          title    = "http_request_adm"
           width    = 1500
           height   = 200
           start    = "-PT3H"
@@ -259,7 +259,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ["CWAgent", "mem_used_percent", "InstanceId", id, { "region" : "us-east-1" }]]
           view    = "timeSeries"
           stacked = false
-          title   = "Mem_used_percent adm"
+          title   = "Mem_used_percent_adm"
           period  = 300
           timezone = "+0700"
           region  = "us-east-1"
@@ -273,12 +273,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.admin_instance_ids :
-            ["CWAgent", "disk_used_percent", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.admin_instance_ids :
+            ["CWAgent", "disk_used_percent", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "Disk_used_percent adm"
+          title    = "Disk_used_percent_adm"
           period   = 300
           width    = 1500
           height   = 200
@@ -296,12 +296,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.admin_instance_ids :
-            ["AWS/EC2", "CPUUtilization", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.admin_instance_ids :
+            ["AWS/EC2", "CPUUtilization", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "CPUUtilization adm"
+          title    = "CPUUtilization_adm"
           period   = 300
           width    = 1500
           height   = 200
@@ -332,13 +332,13 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           metrics = [
             [{ "expression" : "m2/m1*100", "label" : "Expression1", "id" : "m3", "region" : "us-east-1" }],
             ["Backend_Metric", aws_cloudwatch_log_metric_filter.http_request_be.name, { "region" : "us-east-1", "id" : "m1", "visible" : false }],
-            [".", aws_cloudwatch_log_metric_filter.http_request_error.name, { "region" : "us-east-1", "id" : "m2", "visible" : false }]
+            ["Backend_Metric", aws_cloudwatch_log_metric_filter.http_request_error_be.name, { "region" : "us-east-1", "id" : "m2", "visible" : false }]
           ]
           view     = "timeSeries"
           stacked  = false
           stat     = "Sum"
           period   = 60
-          title    = "HTTP_Error_percent_BE"
+          title    = "http_error_percent_be"
           width    = 1695
           height   = 200
           start    = "-PT3H"
@@ -355,13 +355,13 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            ["Backend_Metric", aws_cloudwatch_log_metric_filter.number_exception.name, { "region" : "us-east-1" }]
+            ["Backend_Metric", aws_cloudwatch_log_metric_filter.number_exception_be.name, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
           period   = 60
           stat     = "Sum"
-          title    = "number_exception_BE"
+          title    = "number_exception_be"
           width    = 1695
           height   = 200
           start    = "-PT3H"
@@ -381,7 +381,7 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
           ["CWAgent", "mem_used_percent", "InstanceId", id, { "region" : "us-east-1" }]]
           view    = "timeSeries"
           stacked = false
-          title   = "Mem_used_percent BE"
+          title   = "Mem_used_percent_be"
           period  = 300
           timezone = "+0700"
           region  = "us-east-1"
@@ -395,12 +395,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.backend_instance_ids :
-            ["CWAgent", "disk_used_percent", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.backend_instance_ids :
+            ["CWAgent", "disk_used_percent", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "Disk_used_percent BE"
+          title    = "Disk_used_percent_be"
           period   = 300
           width    = 1500
           height   = 200
@@ -418,12 +418,12 @@ resource "aws_cloudwatch_dashboard" "shopizer_dashboard" {
         height = 6
         properties = {
           metrics = [
-            for instance_id in var.backend_instance_ids :
-            ["AWS/EC2", "CPUUtilization", "InstanceId", instance_id, { "region" : "us-east-1" }]
+            for id in var.backend_instance_ids :
+            ["AWS/EC2", "CPUUtilization", "InstanceId", id, { "region" : "us-east-1" }]
           ]
           view     = "timeSeries"
           stacked  = false
-          title    = "CPUUtilization BE"
+          title    = "CPUUtilization_be"
           period   = 300
           width    = 1500
           height   = 200
