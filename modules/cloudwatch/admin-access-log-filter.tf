@@ -13,7 +13,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_200_adm" {
 resource "aws_cloudwatch_log_metric_filter" "http_5xx_adm" {
   name           = "Http_5xx_adm"
   pattern        = "[ip, id, user, timestamp, request_time, request, status_code=5*, size]"
-  log_group_name = "adm-access.log"
+  log_group_name = "adm-error.log"
 
   metric_transformation {
     name      = "Http_5xx_adm"
@@ -25,7 +25,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_5xx_adm" {
 resource "aws_cloudwatch_log_metric_filter" "http_4xx_adm" {
   name           = "Http_error_4xx_adm"
   pattern        = "[ip, id, user, timestamp, request_time, request, status_code=4*, size]"
-  log_group_name = "adm-access.log"
+  log_group_name = "adm-error.log"
 
   metric_transformation {
     name      = "http_4xx_adm"
