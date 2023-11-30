@@ -273,5 +273,3 @@ resource "aws_cloudwatch_metric_alarm" "backend_low_cpu" {
   }
   alarm_actions             = [aws_autoscaling_policy.backend_scale_down.arn]
 }
-
-

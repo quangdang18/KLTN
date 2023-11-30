@@ -13,7 +13,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_200_fe" {
 resource "aws_cloudwatch_log_metric_filter" "http_5xx_fe" {
   name           = "http_5xx_fe"
   pattern        = "[ip, id, user, timestamp, request_time, request, status_code=5*, size]"
-  log_group_name = "fe-error.log"
+  log_group_name = "fe-access.log"
 
   metric_transformation {
     name      = "http_5xx_fe"
@@ -25,7 +25,7 @@ resource "aws_cloudwatch_log_metric_filter" "http_5xx_fe" {
 resource "aws_cloudwatch_log_metric_filter" "http_4xx_fe" {
   name           = "http_4xx_fe"
   pattern        = "[ip, id, user, timestamp, request_time, request, status_code=4*, size]"
-  log_group_name = "fe-error.log"
+  log_group_name = "fe-access.log"
 
   metric_transformation {
     name      = "http_4xx_fe"
